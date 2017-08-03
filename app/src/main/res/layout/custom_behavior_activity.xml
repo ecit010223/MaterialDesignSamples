@@ -13,6 +13,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/md"/>
 
+    <!-- 只有CoordinatorLayout的直接子View配置app:layout_behavior有意义-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/collapsedTitleHeight"
