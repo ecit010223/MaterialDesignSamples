@@ -2,56 +2,75 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-       <android.support.design.widget.AppBarLayout
-           android:id="@+id/appbar_layout"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
-<!--
-               <android.support.v7.widget.Toolbar
-                   android:layout_width="match_parent"
-                   android:layout_height="200dp"
-                   android:minHeight="?attr/actionBarSize"
-                   app:title="AppbarLayout"
-                   android:gravity="bottom"
-                   app:titleTextColor="@color/white"
-                   app:layout_scrollFlags="scroll|snap"
-                   />-->
-           <android.support.design.widget.CollapsingToolbarLayout
-               android:id="@+id/collapse_layout"
-               android:layout_width="match_parent"
-               android:layout_height="250dp"
-               app:contentScrim="@color/colorPrimary"
-               app:layout_scrollFlags="scroll|exitUntilCollapsed"
-               >
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/meizhi"
-                    app:layout_collapseMode="parallax"
-                    />
-               <android.support.v7.widget.Toolbar
-                   android:id="@+id/appbar_layout_toolbar"
-                   android:layout_width="match_parent"
-                   android:layout_height="?attr/actionBarSize"
-                   app:title="AppbarLayout"
-                   app:titleTextColor="@color/white"
-                   app:navigationIcon="@mipmap/navigation_back_white"
-                   app:layout_collapseMode="pin"
-                   />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-           </android.support.design.widget.CollapsingToolbarLayout>
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--
+                       <android.support.v7.widget.Toolbar
+                           android:layout_width="match_parent"
+                           android:layout_height="200dp"
+                           android:minHeight="?attr/actionBarSize"
+                           app:title="AppbarLayout"
+                           android:gravity="bottom"
+                           app:titleTextColor="@color/white"
+                           app:layout_scrollFlags="scroll|snap"
+                           />-->
+        <!-- 子View：即CollapsingToolbarLayout必须为AppBarLayout的子视图 -->
+        <!-- app:layout_scrollFlags属性值如下 -->
+        <!-- scroll:子View添加layout_scrollFlags属性的值scroll时，这个View将会随着可滚动View(如:ScrollView,
+                以下都会用ScrollView来代替可滚动的View)一起滚动，就好像子View是属于ScrollView的一部分一样。-->
+        <!-- enterAlways:当ScrollView向下滑动时，子View将直接向下滑动，而不管ScrollView是否在滑动。
+                注意：要与scroll搭配使用，否者是不能滑动的。-->
+        <!-- enterAlwaysCollapsed：是对enterAlways的补充，当ScrollView向下滑动的时候，滑动View(也就是设置了
+                enterAlwaysCollapsed的View)下滑至折叠的高度，当ScrollView到达滑动范围的结束值的时候，滑动
+                View剩下的部分开始滑动。这个折叠的高度是通过View的minimum height(最小高度)指定的。
+                要配合scroll｜enterAlways一起使用-->
+        <!-- exitUntilCollapsed:当ScrollView滑出屏幕时(也就时向上滑动时)，滑动View先响应滑动事件，滑动至折叠高度，
+                也就是通过minimum height设置的最小高度后，就固定不动了，再把滑动事件交给scrollview继续滑动。-->
+        <!-- app:contentScrim属性表示当CollapsingToolbarLayout滑动到一个确定的阀值时将显示或者隐藏内容纱布
+                纱布可以是图片也可以是颜色色值 -->
+        <!-- app:statusBarScrim属性当CollapsingToolbarLayout滑动到一个确定的阀值时，状态栏显示或隐藏纱布，
+                可以通过setStatusBarScrim(Drawable)来设置纱布图片。纱布可以是图片也可以是颜色色值 -->
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapse_layout"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-       </android.support.design.widget.AppBarLayout>
+            <!-- app:layout_collapseMode="parallax":让CollapsingToolbarLayout的子View 可以有视差的滚动 -->
+            <!-- app:layout_collapseMode="pin":子View可以固定在全局空间内，这对于实现了折叠并且允许通过滚动
+                    布局来固定Toolbar这种情况非常有用-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/meizhi"
+                app:layout_collapseMode="parallax"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/appbar_layout_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@mipmap/navigation_back_white"
+                app:title="AppbarLayout"
+                app:titleTextColor="@color/white"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

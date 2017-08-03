@@ -8,6 +8,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 import com.zhouwei.md.materialdesignsamples.R;
 import com.zhouwei.md.materialdesignsamples.utils.StatusBarUtils;
@@ -24,14 +25,21 @@ public class AppbarLayoutActivity extends AppCompatActivity {
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.appbar_layout_toolbar);
-        StatusBarUtils.setTranslucentImageHeader(this,0,toolbar);
+        StatusBarUtils.setTranslucentImageHeader(this, 0, toolbar);
         toolbar.setTitleTextColor(Color.TRANSPARENT);
         toolbar.inflateMenu(R.menu.menu_search);
+        toolbar.setNavigationOnClickListener(new Toolbar.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
 
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapse_layout);
+        //当CollapsingToolbarLayout滑动到最大时的标题
         collapsingToolbarLayout.setTitle("");
         collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.white));
@@ -40,11 +48,12 @@ public class AppbarLayoutActivity extends AppCompatActivity {
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                Log.e("zhouwei","appbarHeight:"+appBarLayout.getHeight()+" getTotalScrollRange:"+appBarLayout.getTotalScrollRange()+" offSet:"+verticalOffset);
-                if(Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()){
+                Log.d("zhouwei", "appbarHeight:" + appBarLayout.getHeight() + " getTotalScrollRange:" +
+                        appBarLayout.getTotalScrollRange() + " offSet:" + verticalOffset);
+                if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
                     toolbar.setTitleTextColor(getResources().getColor(R.color.white));
                     collapsingToolbarLayout.setTitle("AppbarLayout");
-                }else{
+                } else {
                     collapsingToolbarLayout.setTitle("");
                 }
             }

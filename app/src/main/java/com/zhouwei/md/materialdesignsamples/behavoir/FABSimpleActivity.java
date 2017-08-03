@@ -20,7 +20,11 @@ import static android.support.design.widget.Snackbar.make;
 
 public class FABSimpleActivity extends AppCompatActivity {
     private static final String TAG = "FABSimpleActivity";
-    private FloatingActionButton fab1,fab2;
+    /** 对应下面的FloatingActionButton **/
+    private FloatingActionButton fab1;
+    /** 对应AppBarLayout下面的FloatingActionButton **/
+    private FloatingActionButton fab2;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +36,7 @@ public class FABSimpleActivity extends AppCompatActivity {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                make(fab1,"点击fab1",Snackbar.LENGTH_LONG).show();
+                make(fab1, "点击fab1", Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -47,13 +51,13 @@ public class FABSimpleActivity extends AppCompatActivity {
         fab2.hide(new FloatingActionButton.OnVisibilityChangedListener() {
             @Override
             public void onHidden(FloatingActionButton fab) {
-                Log.i(TAG,"fab hidden...");
+                Log.i(TAG, "fab hidden...");
             }
         });
         fab2.show(new FloatingActionButton.OnVisibilityChangedListener() {
             @Override
             public void onShown(FloatingActionButton fab) {
-                Log.i(TAG,"fab show...");
+                Log.i(TAG, "fab show...");
             }
         });
 
@@ -67,15 +71,14 @@ public class FABSimpleActivity extends AppCompatActivity {
         });
 
 
-
     }
 
-    private void showSnackbar(){
-        Snackbar snackbar = Snackbar.make(fab2,"哈哈，我是Snackbar",Snackbar.LENGTH_SHORT);
+    private void showSnackbar() {
+        Snackbar snackbar = Snackbar.make(fab2, "哈哈，我是Snackbar", Snackbar.LENGTH_SHORT);
         snackbar.setAction("UNDO", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FABSimpleActivity.this,"执行Undo操作",Toast.LENGTH_LONG).show();
+                Toast.makeText(FABSimpleActivity.this, "执行Undo操作", Toast.LENGTH_LONG).show();
             }
         });
 

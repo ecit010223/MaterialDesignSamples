@@ -7,6 +7,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +31,14 @@ import java.util.List;
  */
 
 public class JanshuActivity extends AppCompatActivity {
+    /** 最上面的横向滚动广告 **/
     private ConvenientBanner mConvenientBanner;
     private RecyclerView mRecyclerView;
+    /** 包含了最上部分的广告、橫向滚动按钮与输入框的AppBarLayout **/
     private AppBarLayout mAppBarLayout;
     private View mLine;
-    private String[] images = {"http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
+    private String[] images = {
+            "http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
             "http://img2.3lian.com/2014/f2/37/d/40.jpg",
             "http://d.3987.com/sqmy_131219/001.jpg",
             "http://img2.3lian.com/2014/f2/37/d/39.jpg",
@@ -72,6 +76,7 @@ public class JanshuActivity extends AppCompatActivity {
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                Log.d("testing","verticalOffset:"+verticalOffset+",getTotalScrollRange:"+mAppBarLayout.getTotalScrollRange());
                 if(Math.abs(verticalOffset) >= mAppBarLayout.getTotalScrollRange()){
                     mLine.setVisibility(View.VISIBLE);
                 }else{
